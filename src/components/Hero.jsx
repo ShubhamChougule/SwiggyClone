@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { arr } from "../components/FetchedData";
 import Card from "./Card";
+import ShimmerCard from "./ShimmerCard";
 
 const Hero = () => {
   const [data, setData] = useState([]);
-  const [sortbyrating, setSortbyrating] = useState(false);
-  const [sortbydeltime, setSortbydeltime] = useState(false);
+  const [sortbyrating, setSortbyrating] = useState(true);
+  const [sortbydeltime, setSortbydeltime] = useState(true);
   const [search, setSearch] = useState("");
+  const [shimmer, setShimmer] = useState(true);
 
   useEffect(() => {
+    setTimeout(() => {
+      setShimmer(false);
+    }, 1500);
     setData(arr);
   }, []);
 
@@ -88,15 +93,17 @@ const Hero = () => {
         </div>
 
         <div className="cardContainer py-5 flex flex-wrap justify-center items-center">
-          {data
-            .filter((item) => {
-              return search.toLowerCase() === ""
-                ? item
-                : item.info.name.toLowerCase().includes(search.toLowerCase());
-            })
-            .map((item) => (
-              <Card props={item.info} key={item.info.id} />
-            ))}
+          {shimmer
+            ? data.map(() => <ShimmerCard />)
+            : data
+                .filter((item) => {
+                  return search.toLowerCase() === ""
+                    ? item
+                    : item.info.name
+                        .toLowerCase()
+                        .includes(search.toLowerCase());
+                })
+                .map((item) => <Card props={item.info} key={item.info.id} />)}
         </div>
       </div>
     </div>

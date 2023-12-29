@@ -8,7 +8,7 @@ const Card = (props) => {
       <div className="card w-[330px] my-2 lg:my-5 mx-5">
         <div className="">
           <img
-            className="object-cover h-56 w-full rounded-3xl hover:scale-95  cursor-pointer"
+            className="object-cover h-56 w-full rounded-3xl ease-in duration-150 hover:scale-95  cursor-pointer"
             src={
               "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
               props.props.cloudinaryImageId
